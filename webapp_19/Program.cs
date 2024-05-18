@@ -13,7 +13,8 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();   //Commented out by jack
+app.UseDefaultFiles();         //Added by jack
 app.UseStaticFiles();
 
 app.UseRouting();
