@@ -13,7 +13,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy(
         "CorsPolicy",
         builder => builder
-            .AllowAnyOrigin()  //This allows requests from any origin.  For a specific origin (more secure) do this:  .WithOrigins("http://localhost:5049")
+            .WithOrigins("http://localhost:5029")   //Use the port your webapp is running on!
             .AllowAnyMethod()
             .AllowAnyHeader()
             .AllowCredentials()
@@ -30,7 +30,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();  //Commented out by Jack
+
+app.UseCors("CorsPolicy"); //Added by Jack
 
 app.UseAuthorization();
 
