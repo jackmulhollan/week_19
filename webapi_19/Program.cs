@@ -7,6 +7,20 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+//jack - begin
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(
+        "CorsPolicy",
+        builder => builder
+            .AllowAnyOrigin()  //This allows requests from any origin.  For a specific origin (more secure) do this:  .WithOrigins("http://localhost:5049")
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .AllowCredentials()
+    );
+});
+//jack - end
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
