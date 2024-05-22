@@ -4,8 +4,14 @@ function webapp_19() {
     var button01 = document.getElementById("button-01");
     var employeeTable = document.getElementById("employee-table");
 
+
+
     //Add event listeners
     button01.addEventListener("click", handleButton01Click);
+
+
+
+
 
     //Functions
     function handleButton01Click() {
@@ -40,13 +46,21 @@ function webapp_19() {
 
         //Create table top boilerplate
         var empString = '<table class="table">';
-        empString += '<thead><tr><th scope="col">Employee ID</th><th scope="col">First Name</th><th scope="col">Last Name</th><th scope="col">Salary</th></tr></thead>';
+        empString += '<thead><tr><th scope="col">Employee ID</th><th scope="col">First Name</th><th scope="col">Last Name</th><th scope="col">Salary</th><th scope="col"></th></tr></thead>';
         empString += '<tbody>';
 
         //Loop over employees array and build the table rows
         for (var i = 0; i < employees.length; i++) {
             var employee = employees[i];
-            empString += '<tr><td scope="row">' + employee.employeeId + '</td> <td>' + employee.firstName + '</td><td>' + employee.lastName + '</td><td>' + employee.salary + '</td></tr>';
+            empString += '<tr>';
+            empString += '<td scope="row">' + employee.employeeId + '</td><td>' + employee.firstName + '</td><td>' + employee.lastName + '</td><td>' + employee.salary + '</td>';
+
+            empString += '<td>';
+            empString += '<button type="button" class="btn btn-outline-secondary btn-sm employee-table-update_button" data-employee-id="' + employee.employeeId + '">Update</button>';
+            empString += '<button type="button" class="btn btn-outline-secondary btn-sm employee-table-delete_button" data-employee-id="' + employee.employeeId + '">Delete</button>';
+            empString += '</td>';
+
+            empString += '</tr>';
         }
 
         //Create table bottom boilerplate
@@ -59,8 +73,31 @@ function webapp_19() {
 
         //Inject the table string
         employeeTable.innerHTML = empString;
+
+        var updateButtons = document.getElementsByClassName("employee-table-update_button");
+        var deleteButtons = document.getElementsByClassName("employee-table-delete_button");
+
+        for (var i = 0; i < updateButtons.length; i++) {
+            var updateButton = updateButtons[i];
+            updateButton.addEventListener("click", handleEmployeeTableUpdateClick);
+        }
+
+        for (var i = 0; i < deleteButtons.length; i++) {
+            var deleteButton = deleteButtons[i];
+            deleteButton.addEventListener("click", handleEmployeeTableDeleteClick);
+        }
+
     }
 
+    function handleEmployeeTableUpdateClick(event) {
+        var employeeId = event.target.getAttribute("data-employee-id");
+        alert("Your are wanting to update EmployeID " + employeeId);
+    }
+
+    function handleEmployeeTableDeleteClick(event) {
+        var employeeId = event.target.getAttribute("data-employee-id");
+        alert("Your are wanting to delete EmployeID " + employeeId);
+    }
 
 }
 
